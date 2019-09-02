@@ -158,9 +158,11 @@ public class MainActivity extends AppCompatActivity {
                      * SENDING FILE FROM BODY USING POST AND OPENCONNECTION METHOD
                      */
 
+//      ============================================START CONTENT WRAPPER===============================================
+
+
 //      ============================================WRITE FILE===============================================
 
-//      ============================================START CONTENT WRAPPER===============================================
                     //writing bytes to data outputstream
                     dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
                     dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
