@@ -150,13 +150,20 @@ public class MainActivity extends AppCompatActivity {
                     connection.setRequestProperty("ENCTYPE", "multipart/form-data");
                     connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
                     connection.setRequestProperty("uploaded_file", selectedFilePath);
+
                     //creating new dataoutputstream
                     dataOutputStream = new DataOutputStream(connection.getOutputStream());
-                    String dispName= "file";
-                    //String dispName= "uploaded_file";
+
+                    /**
+                     * SENDING FILE FROM BODY USING POST AND OPENCONNECTION METHOD
+                     */
+
+//      ============================================WRITE FILE===============================================
+
+//      ============================================START CONTENT WRAPPER===============================================
                     //writing bytes to data outputstream
                     dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
-                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\""+ dispName +"\";filename=\""
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"file\";filename=\""
                             + fileName + "\"" + lineEnd);
                     dataOutputStream.writeBytes("Content-Type: */*" + lineEnd);
 
@@ -189,6 +196,45 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     dataOutputStream.writeBytes(lineEnd);
+//      ============================================END WRITE FILE===============================================
+                    /**
+                     * SENDING PLAIN TEXT FROM BODY USING POST AND OPENCONNECTION METHOD
+                     */
+                    //text upload
+                    String CATEGORY = "TERROR ATTACK";
+                    String TITLE    = "Dusit Attack";
+                    String DESCRIPTION = "The 2019 DusitD2 complex attack was a terrorist attack that occurred from 15 to 16 January 2019 in the Westlands area of Nairobi, Kenya, which left more than 20 people dead.";
+                    String LOCATION = "1.2725\\u00B0 S, 36.8398\\u00B0 E"; //escaped format of "1.2725° S, 36.8398° E"
+
+//      ============================================WRITE CATEGORY===============================================
+                    dataOutputStream.writeBytes(twoHyphens+ boundary + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"category\";" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd + CATEGORY + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+
+//      ============================================WRITE TITLE===============================================
+                    dataOutputStream.writeBytes(twoHyphens+ boundary + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"title\";" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd + TITLE + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+
+//      ============================================WRITE DESCRIPTION===============================================
+                    dataOutputStream.writeBytes(twoHyphens+ boundary + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"description\";" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd + DESCRIPTION + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+
+//      ============================================WRITE LOCATION===============================================
+                    dataOutputStream.writeBytes(twoHyphens+ boundary + lineEnd);
+                    dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"location\";" + lineEnd);
+                    dataOutputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd + LOCATION + lineEnd);
+                    dataOutputStream.writeBytes(lineEnd);
+
+//      ============================================END CONTENT WRAPPER===============================================
                     dataOutputStream.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
                     try {
